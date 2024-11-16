@@ -61,10 +61,10 @@ class TestState(unittest.TestCase):
         self.assertEqual(inst.created_at, date)
         self.assertEqual(inst.updated_at, date)
 
-   
+
 class TestSave(unittest.TestCase):
     '''Test Save'''
-    
+
     @classmethod
     def setUp(self):
         try:
@@ -82,7 +82,7 @@ class TestSave(unittest.TestCase):
             os.rename("tmp", "file.json")
         except IOError:
             pass
-    
+
     def test_save(self):
         inst = State()
         updated_at = inst.updated_at
@@ -148,6 +148,6 @@ class TestSave(unittest.TestCase):
         inst = State()
         self.assertNotEqual(inst.to_dict(), inst.__dict__)
 
+
 if __name__ == "__main__":
     unittest.main()
-    
