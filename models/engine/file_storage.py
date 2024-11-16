@@ -9,8 +9,10 @@ from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 
+
 class FileStorage():
-    '''serializes instances to a JSON file and deserializes JSON file to instances'''
+    '''serializes instances to a JSON file and deserializes
+    JSON file to instances'''
 
     __file_path = "file.json"
     __objects = {}
@@ -29,9 +31,10 @@ class FileStorage():
         FileStorage.__objects[key] = obj
 
     def save(self):
-        '''serializes __objects to the JSON file 
+        '''serializes __objects to the JSON file
         Return: Nothing'''
-        object_dict = {obj : FileStorage.__objects[obj].to_dict() for obj in FileStorage.__objects.keys()}
+        object_dict = {obj: FileStorage.__objects[obj].to_dict()
+                       for obj in FileStorage.__objects.keys()}
         with open(FileStorage.__file_path, 'w') as my_file:
             json.dump(object_dict, my_file)
 
@@ -49,4 +52,3 @@ class FileStorage():
             return
         except json.decoder.JSONDecodeError:
             return
-        
