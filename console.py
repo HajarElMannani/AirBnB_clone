@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-'''program called console.py that contains the entry point of the command interpreter'''
+'''program called console.py that contains the entry point
+ of the command interpreter'''
 import cmd
 import re
 from models.base_model import BaseModel
@@ -11,22 +12,23 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
+
 class HBNBCommand(cmd.Cmd):
     '''command processor for hbnb'''
     prompt = '(hbnb) '
 
     __class = ["BaseModel",
-                "User",
-                "State",
-                "Place",
-                "City",
-                "Amenity",
-                "Review"]
+               "User",
+               "State",
+               "Place",
+               "City",
+               "Amenity",
+               "Review"]
 
-          
     def do_EOF(self, arg):
         '''Exit the program'''
         return True
+
     def do_quit(self, arg):
         '''Quit command to exit the program
 '''
@@ -42,96 +44,99 @@ class HBNBCommand(cmd.Cmd):
         args = arg.split()
         if (len(args) < 1):
             print("** class name missing **")
-        
         elif (args[0] in HBNBCommand.__class):
             print("{}".format(eval(args[0])().id))
             storage.save()
         else:
             print("** class doesn't exist **")
 
-
     def do_show(self, arg):
-        ''' Prints the string representation of an instance based on the class name and id
-'''
+        ''' Prints the string representation of an instance
+        based on the class name and id
+        '''
         args = arg.split()
         if (len(args) < 1):
-            print ("** class name missing **")
+            print("** class name missing **")
         elif (args[0] not in HBNBCommand.__class):
-            print ("** class doesn't exist **")
+            print("** class doesn't exist **")
         elif (args[0] in HBNBCommand.__class) and len(args) == 1:
-            print ("** instance id missing **")
+            print("** instance id missing **")
         elif "{}.{}".format(args[0], args[1]) not in storage.all():
             print("** no instance found **")
         else:
             print(storage.all()["{}.{}".format(args[0], args[1])])
 
-
     def do_destroy(self, arg):
         '''Deletes an instance based on the class name and id'''
         args = arg.split()
         if (len(args) < 1):
-            print ("** class name missing **")
+            print("** class name missing **")
         elif (args[0] not in HBNBCommand.__class):
-            print ("** class doesn't exist **")
+            print("** class doesn't exist **")
         elif (args[0] in HBNBCommand.__class) and len(args) == 1:
-            print ("** instance id missing **")
+            print("** instance id missing **")
         elif "{}.{}".format(args[0], args[1]) not in storage.all():
-            print ("** no instance found **")
+            print("** no instance found **")
         else:
             del storage.all()["{}.{}".format(args[0], args[1])]
             storage.save()
 
     def do_all(self, arg):
-        '''Prints all string representation of all instances based or not on the class name'''
+        '''Prints all string representation of all instances based
+        or not on the class name'''
         if (arg in HBNBCommand.__class) or (not arg):
             list_inst = []
             for obj in storage.all().values():
                 list_inst.append(obj.__str__())
-            print (list_inst)
+            print(list_inst)
         else:
-            print ("** class doesn't exist **")
+            print("** class doesn't exist **")
 
     def do_update(self, arg):
         '''Usage: update <class name> <id> <attribute name> "<attribute value>"
-Updates an instance based on the class name and id by adding or updating attribute'''
+        Updates an instance based on the class name and id by adding or
+        updating attribute'''
         pattern = r'"(.*?)"|\{(.*?)\}|\'(.*?)\'|\[(.*?)\]|(\S+)'
         matches = re.findall(pattern, arg)
-        args = [group[0] or group[1] or group[2] or group[3] or group[4] for group in matches]
+        args = [group[0] or group[1] or group[2] or group[3] or group[4]
+                for group in matches]
         if (len(args) == 0):
-            print ("** class name missing **")
+            print("** class name missing **")
             return False
         elif (args[0] not in HBNBCommand.__class):
-            print ("** class doesn't exist **")
+            print("** class doesn't exist **")
             return False
         elif (args[0] in HBNBCommand.__class) and (len(args) == 1):
-            print ("** instance id missing **")
+            print("** instance id missing **")
             return False
         elif "{}.{}".format(args[0], args[1]) not in storage.all():
-            print ("** no instance found **")
+            print("** no instance found **")
             return False
         elif (len(args) == 2):
-            print ("** attribute name missing **")
+            print("** attribute name missing **")
             return False
         elif (len(args) == 3):
-            print ("** value missing **")
+            print("** value missing **")
             return False
         if (len(args) == 4):
-            if args[2] in storage.all()[f"{args[0]}.{args[1]}"].__class__.__dict__.keys():
-                valtype = type(storage.all()[f"{args[0]}.{args[1]}"].__class__.__dict__[args[2]])
-                storage.all()[f"{args[0]}.{args[1]}"].__dict__[args[2]] = valtype(args[3])
+            key = f"{args[0]}.{args[1]}"
+            if (args[2] in
+                    storage.all()[key].__class__.__dict__.keys()):
+                valtype = type(storage.all()[key].__class__.__dict__[args[2]])
+                storage.all()[key].__dict__[args[2]] = valtype(args[3])
             else:
-                 storage.all()[f"{args[0]}.{args[1]}"].__dict__[args[2]] = args[3]
-
-        elif (type(eval(args[2])) == dict):
-                for key, value in eval(args[2]).items():
-                    if (key in storage.all()[f"{args[0]}.{args[1]}"].__class__.__dict__.keys() and
-                        type(storage.all()[f"{args[0]}.{args[1]}"].__class__.__dict__[key]) in {str, int, float}):
-                        valtype = type(storage.all()[f"{args[0]}.{args[1]}"].__class__.__dict__[key])
-                        storage.all()[f"{args[0]}.{args[1]}"].__dict__[key] = valtype(value)
-                    else:
-                        storage.all()[f"{args[0]}.{args[1]}"].__dict__[key] = value
-      
+                storage.all()[key].__dict__[args[2]] = args[3]
+        elif type(eval(args[2])) == dict:
+            for key, value in eval(args[2]).items():
+                if (key in storage.all()[key].__class__.__dict__.keys() and
+                        type(storage.all()[key].__class__.__dict__[key])
+                        in {str, int, float}):
+                    valtype = type(storage.all()[key].__class__.__dict__[key])
+                    storage.all()[key].__dict__[key] = valtype(value)
+                else:
+                    storage.all()[key].__dict__[key] = value
         storage.save()
-            
+
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
