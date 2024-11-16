@@ -35,7 +35,7 @@ class FileStorage():
         Return: Nothing'''
         object_dict = {obj: FileStorage.__objects[obj].to_dict() \
                        for obj in FileStorage.__objects.keys()}
-        with open(FileStorage.__file_path, 'w') as my_file:
+        with open(FileStorage.__file_path, "w") as my_file:
             json.dump(object_dict, my_file)
 
     def reload(self):
@@ -50,5 +50,5 @@ class FileStorage():
                     self.new(eval(class_name)(**obj))
         except FileNotFoundError:
             return
-#        except json.decoder.JSONDecodeError:
- #           return
+        except json.decoder.JSONDecodeError:
+            return
