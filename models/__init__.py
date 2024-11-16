@@ -1,5 +1,5 @@
-#!/usr/bin/python3
-'''magic method __init__''' 
+#!/usr/bin/python3e
+'''magic method __init__'''
 from models.engine.file_storage import FileStorage
 
 storage = FileStorage()
