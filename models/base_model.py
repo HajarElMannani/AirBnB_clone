@@ -22,8 +22,8 @@ class BaseModel():
         if (len(kwargs) != 0):
             for key, value in kwargs.items():
                 if key != "__class__":
-                    if key in ["created_at", "updated_at"] and
-                    isinstance(value, str):
+                    if key in ["created_at", "updated_at"] and \
+                       isinstance(value, str):
                         value = datetime.strptime(value, date_format)
                     setattr(self, key, value)
         else:
