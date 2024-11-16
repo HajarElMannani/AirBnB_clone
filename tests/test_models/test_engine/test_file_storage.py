@@ -34,7 +34,7 @@ class TestFileStorage(unittest.TestCase):
             FileStorage(None)
 
     '''Test methods'''
-    
+
     @classmethod
     def setUp(self):
         try:
@@ -100,6 +100,7 @@ class TestFileStorage(unittest.TestCase):
             storage.new(User(), "l")
 
     '''Test save'''
+
     def test_save(self):
         text = ""
         base = BaseModel()
@@ -131,7 +132,6 @@ class TestFileStorage(unittest.TestCase):
         with self.assertRaises(TypeError):
             storage.save(None)
 
-        
     '''Test reload'''
     def test_reload(self):
         base = BaseModel()
@@ -150,13 +150,20 @@ class TestFileStorage(unittest.TestCase):
         storage.new(review)
         storage.save()
         storage.reload()
-        self.assertIn("BaseModel." + base.id, FileStorage._FileStorage__objects)
-        self.assertIn("User." + user.id, FileStorage._FileStorage__objects)
-        self.assertIn("State." + state.id, FileStorage._FileStorage__objects)
-        self.assertIn("Place." + place.id, FileStorage._FileStorage__objects)
-        self.assertIn("City." + city.id, FileStorage._FileStorage__objects)
-        self.assertIn("Amenity." + amenity.id, FileStorage._FileStorage__objects)
-        self.assertIn("Review." + review.id, FileStorage._FileStorage__objects)
+        self.assertIn("BaseModel." + base.id,
+                      FileStorage._FileStorage__objects)
+        self.assertIn("User." + user.id,
+                      FileStorage._FileStorage__objects)
+        self.assertIn("State." + state.id,
+                      FileStorage._FileStorage__objects)
+        self.assertIn("Place." + place.id,
+                      FileStorage._FileStorage__objects)
+        self.assertIn("City." + city.id,
+                      FileStorage._FileStorage__objects)
+        self.assertIn("Amenity." + amenity.id,
+                      FileStorage._FileStorage__objects)
+        self.assertIn("Review." + review.id,
+                      FileStorage._FileStorage__objects)
 
     def test_reload_args(self):
         with self.assertRaises(TypeError):
