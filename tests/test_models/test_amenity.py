@@ -56,15 +56,16 @@ class TestAmenity(unittest.TestCase):
     def test_args_and_kwargs_inst(self):
         date = datetime.now()
         date_iso = date.isoformat()
-        inst = Amenity("3", id="32145", created_at=date_iso, updated_at=date_iso)
+        inst = Amenity("3", id="32145",
+                       created_at=date_iso, updated_at=date_iso)
         self.assertEqual(inst.id, "32145")
         self.assertEqual(inst.created_at, date)
         self.assertEqual(inst.updated_at, date)
 
-   
+
 class TestSave(unittest.TestCase):
     '''Test Save'''
-    
+
     @classmethod
     def setUp(self):
         try:
@@ -82,7 +83,7 @@ class TestSave(unittest.TestCase):
             os.rename("tmp", "file.json")
         except IOError:
             pass
-    
+
     def test_save(self):
         inst = Amenity()
         updated_at = inst.updated_at
@@ -148,6 +149,6 @@ class TestSave(unittest.TestCase):
         inst = Amenity()
         self.assertNotEqual(inst.to_dict(), inst.__dict__)
 
+
 if __name__ == "__main__":
     unittest.main()
-    
