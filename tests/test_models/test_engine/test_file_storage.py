@@ -98,3 +98,70 @@ class TestFileStorage(unittest.TestCase):
     def test_new_two_args(self):
         with self.assertRaises(TypeError):
             storage.new(User(), "l")
+
+    '''Test save'''
+    def test_save(self):
+        text = ""
+        base = BaseModel()
+        storage.new(base)
+        user = User()
+        storage.new(user)
+        state = State()
+        storage.new(state)
+        place = Place()
+        storage.new(place)
+        city = City()
+        storage.new(city)
+        amenity = Amenity()
+        storage.new(amenity)
+        review = Review()
+        storage.new(review)
+        storage.save()
+        with open("file.json", "r") as my_file:
+            text = my_file.read()
+            self.assertIn("BaseModel." + base.id, text)
+            self.assertIn("User." + user.id, text)
+            self.assertIn("State." + state.id, text)
+            self.assertIn("Place." + place.id, text)
+            self.assertIn("City." + city.id, text)
+            self.assertIn("Amenity." + amenity.id, text)
+            self.assertIn("Review." + review.id, text)
+
+    def test_save_args(self):
+        with self.assertRaises(TypeError):
+            storage.save(None)
+
+        
+    '''Test reload'''
+    def test_reload(self):
+        base = BaseModel()
+        storage.new(base)
+        user = User()
+        storage.new(user)
+        state = State()
+        storage.new(state)
+        place = Place()
+        storage.new(place)
+        city = City()
+        storage.new(city)
+        amenity = Amenity()
+        storage.new(amenity)
+        review = Review()
+        storage.new(review)
+        storage.save()
+        storage.reload()
+        self.assertIn("BaseModel." + base.id, FileStorage._FileStorage__objects)
+        self.assertIn("User." + user.id, FileStorage._FileStorage__objects)
+        self.assertIn("State." + state.id, FileStorage._FileStorage__objects)
+        self.assertIn("Place." + place.id, FileStorage._FileStorage__objects)
+        self.assertIn("City." + city.id, FileStorage._FileStorage__objects)
+        self.assertIn("Amenity." + amenity.id, FileStorage._FileStorage__objects)
+        self.assertIn("Review." + review.id, FileStorage._FileStorage__objects)
+
+    def test_reload_args(self):
+        with self.assertRaises(TypeError):
+            storage.reload(None)
+
+
+if __name__ == "__main__":
+    unittest.main()
