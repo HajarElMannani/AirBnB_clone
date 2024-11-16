@@ -9,5 +9,3 @@ class Amenity(BaseModel):
         name(str): empty string'''
 
     name = ""
-
-    
