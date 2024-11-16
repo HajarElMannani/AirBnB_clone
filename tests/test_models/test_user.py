@@ -24,7 +24,7 @@ class TestUser(unittest.TestCase):
 
     def test_password_str(self):
         self.assertEqual(type(User.password), str)
-        
+
     def test_type_id(self):
         self.assertEqual(type(User().id), str)
 
@@ -70,10 +70,10 @@ class TestUser(unittest.TestCase):
         self.assertEqual(inst.created_at, date)
         self.assertEqual(inst.updated_at, date)
 
-   
+
 class TestSave(unittest.TestCase):
     '''Test Save'''
-    
+
     @classmethod
     def setUp(self):
         try:
@@ -91,7 +91,7 @@ class TestSave(unittest.TestCase):
             os.rename("tmp", "file.json")
         except IOError:
             pass
-    
+
     def test_save(self):
         inst = User()
         updated_at = inst.updated_at
@@ -157,6 +157,6 @@ class TestSave(unittest.TestCase):
         inst = User()
         self.assertNotEqual(inst.to_dict(), inst.__dict__)
 
+
 if __name__ == "__main__":
     unittest.main()
-
