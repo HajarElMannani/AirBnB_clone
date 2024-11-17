@@ -156,6 +156,14 @@ class HBNBCommand(cmd.Cmd):
                     storage.all()[key].__dict__[key] = value
         storage.save()
 
+    def default(self, arg):
+        '''Print all using the syntax <class name>.all()
+        '''
+        if '.' in arg:
+            cls, args = arg.split('.', 1)
+            if args == "all()":
+                return self.do_all(cls)
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
