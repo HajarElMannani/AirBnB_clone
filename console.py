@@ -14,7 +14,10 @@ from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
-    '''command processor for hbnb'''
+    '''command processor for hbnb
+    Attributes:
+        prompt(str): prompt for command line
+    '''
     prompt = '(hbnb) '
 
     __class = ["BaseModel",
@@ -26,21 +29,26 @@ class HBNBCommand(cmd.Cmd):
                "Review"]
 
     def do_EOF(self, arg):
-        '''Exit the program'''
+        '''Exit the program
+        '''
         return True
 
     def do_quit(self, arg):
         '''Quit command to exit the program
-'''
+        '''
         return True
 
     def emptyline(self):
-        '''when emptyline, do nothing'''
+        '''when emptyline, do nothing
+        '''
         pass
 
     def do_create(self, arg):
         '''create [BaseModel]
-        create new instance of the class BaseModel'''
+        create new instance of the class BaseModel
+        Arguments:
+        arg(str): arguments
+        '''
         args = arg.split()
         if (len(args) < 1):
             print("** class name missing **")
@@ -53,6 +61,8 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, arg):
         ''' Prints the string representation of an instance
         based on the class name and id
+        Arguments:
+            arg(str): arguments
         '''
         args = arg.split()
         if (len(args) < 1):
@@ -67,7 +77,10 @@ class HBNBCommand(cmd.Cmd):
             print(storage.all()["{}.{}".format(args[0], args[1])])
 
     def do_destroy(self, arg):
-        '''Deletes an instance based on the class name and id'''
+        '''Deletes an instance based on the class name and id
+        Arguments:
+            args(str): arguments
+        '''
         args = arg.split()
         if (len(args) < 1):
             print("** class name missing **")
@@ -83,7 +96,10 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         '''Prints all string representation of all instances based
-        or not on the class name'''
+        or not on the class name
+        Arguments:
+            arg(str): arguments
+        '''
         if (arg in HBNBCommand.__class) or (not arg):
             list_inst = []
             for obj in storage.all().values():
@@ -95,7 +111,10 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, arg):
         '''Usage: update <class name> <id> <attribute name> "<attribute value>"
         Updates an instance based on the class name and id by adding or
-        updating attribute'''
+        updating attribute
+        Arguments:
+            arg(str): arguments
+        '''
         pattern = r'"(.*?)"|\{(.*?)\}|\'(.*?)\'|\[(.*?)\]|(\S+)'
         matches = re.findall(pattern, arg)
         args = [group[0] or group[1] or group[2] or group[3] or group[4]
