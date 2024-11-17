@@ -12,7 +12,10 @@ from models.review import Review
 
 class FileStorage():
     '''serializes instances to a JSON file and deserializes
-    JSON file to instances'''
+    JSON file to instances
+    Attributes:
+        __file_Path(str): name of json saving file
+        __objects(dict): a dictionary'''
 
     __file_path = "file.json"
     __objects = {}
@@ -33,8 +36,7 @@ class FileStorage():
     def save(self):
         '''serializes __objects to the JSON file
         Return: Nothing'''
-        object_dict = {obj: FileStorage.__objects[obj].to_dict()
-                       for obj in FileStorage.__objects.keys()}
+        object_dict = {obj: FileStorage.__objects[obj].to_dict() for obj in FileStorage.__objects.keys()}
         with open(FileStorage.__file_path, "w") as my_file:
             json.dump(object_dict, my_file)
 
