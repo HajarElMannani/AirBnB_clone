@@ -44,16 +44,9 @@ class BaseModel():
         '''returns a dictionary containing all keys/values of __dict__
         of the instance
         Return: dictionary'''
-        '''
-        dict_copy = self.__dict__.copy()
-        inst_dict = {dict_copy,
-                     '__class__': self.__class__.__name__,
-                     'created_at': self.created_at.isoformat()
-                     'updated_at': self.updated_at.isoformat()}
-        return inst_dict
-'''
-        rdict = self.__dict__.copy()
-        rdict["created_at"] = self.created_at.isoformat()
-        rdict["updated_at"] = self.updated_at.isoformat()
-        rdict["__class__"] = self.__class__.__name__
-        return rdict
+        return {
+            **self.__dict__,
+            "created_at": self.created_at.isoformat(),
+            "updated_at": self.updated_at.isoformat(),
+            "__class__": self.__class__.__name__,
+        }
