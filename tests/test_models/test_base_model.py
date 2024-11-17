@@ -45,18 +45,16 @@ class TestBaseModel(unittest.TestCase):
     def test_kwargs_inst(self):
         date = datetime.now()
         date_iso = date.isoformat()
-        inst = BaseModel(id="35445", created_at=date_iso,
-                         updated_at=date_iso)
+        inst = BaseModel(id="35445", created_at=date_iso, updated_at=date_iso)
         self.assertEqual(inst.id, "35445")
         self.assertEqual(inst.created_at, date)
         self.assertEqual(inst.updated_at, date)
 
     def test_args_and_kwargs_inst(self):
         date = datetime.now()
-        date_iso = date.isoformat()
-        inst = BaseModel("3", id="32145", created_at=date_iso,
-                         updated_at=date_iso)
-        self.assertEqual(inst.id, "32145")
+        d_iso = date.isoformat()
+        inst = BaseModel("3", id="32", created_at=d_iso, updated_at=d_iso)
+        self.assertEqual(inst.id, "32")
         self.assertEqual(inst.created_at, date)
         self.assertEqual(inst.updated_at, date)
 
