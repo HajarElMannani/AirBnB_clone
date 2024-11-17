@@ -16,7 +16,7 @@ The console will help us manage the backend and manage the objects of this proje
 Start the console by running the file `console.py`  
 ```
 $ ./console.py
-   (hbnb)
+(hbnb)
 ```
 This will run the console on interactive mode.  
 
