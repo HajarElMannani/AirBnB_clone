@@ -2,7 +2,7 @@
 '''contains class BaseModel'''
 import uuid
 from datetime import datetime
-from models import storage
+import models
 
 
 class BaseModel():
@@ -26,7 +26,7 @@ class BaseModel():
                         value = datetime.strptime(value, date_format)
                     setattr(self, key, value)
         else:
-            storage.new(self)
+            models.storage.new(self)
 
     def __str__(self):
         '''return string representation
@@ -38,7 +38,7 @@ class BaseModel():
         current datetime
         Return: Current datetime'''
         self.updated_at = datetime.now()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         '''returns a dictionary containing all keys/values of __dict__
