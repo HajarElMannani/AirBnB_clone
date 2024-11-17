@@ -14,9 +14,10 @@ The console will help us manage the backend and manage the objects of this proje
 ----------------------------------------------------------------
 ### How to start the console?  
 Start the console by running the file `console.py`  
-```$ ./console.py
+```
+$ ./console.py
    (hbnb)
-   ```
+```
 This will run the console on interactive mode.  
 
 To quit the console use `ctrl + d` or the command `quit`:  
@@ -28,7 +29,8 @@ $
 
 The console uses the following commands:  
 Eof, quit, create, show, destroy, all, help, update.
---------------------------------------------------
+
+
 **EOF**  
 Use EOF command or `ctrl+d` to quit the console.  
 ```
